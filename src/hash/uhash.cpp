@@ -8,15 +8,21 @@
 #include <algorithm>
 #include <sstream>
 
+#ifdef COMPILE_WITH_CUDA
+
 #include "runtime_detection.cuh"
 #include "cudahash.hpp"
+
+#endif
+
 
 using namespace tensorcoin::hash;
 
 
 std::unique_ptr<UHash> UHash::make_uhash() {
-    if (!detect_cuda())
-        return std::make_unique<CUDAHash>(CUDAHash());
+#ifdef COMPILE_WITH_CUDA
+    if (!detect_cuda()) return std::make_unique<CUDAHash>(CUDAHash());
+#endif
     return std::make_unique<CPUHash>(CPUHash());
 }
 

@@ -26,7 +26,7 @@ void (*getProcAddress(void *lib, const char *name))(void) {
 #ifdef WINDOWS
     return (void (*)(void))GetProcAddress(lib, name);
 #else
-    return (void (*)(void))dlsym(lib, (const char *)name);
+    return (void (*)(void)) dlsym(lib, (const char *) name);
 #endif
 }
 
@@ -39,7 +39,9 @@ int freeLibrary(void *lib) {
 }
 
 typedef CUresult CUDAAPI (*cuInit_pt)(unsigned int Flags);
+
 typedef CUresult CUDAAPI (*cuDeviceGetCount_pt)(int *count);
+
 typedef CUresult CUDAAPI (*cuDeviceComputeCapability_pt)(int *major, int *minor,
                                                          CUdevice dev);
 
@@ -55,17 +57,18 @@ int detect_cuda() {
         return 1;
     }
 
-    if ((my_cuInit = (cuInit_pt)getProcAddress(cuLib, "cuInit")) == NULL) {
+    if ((my_cuInit = (cuInit_pt) getProcAddress(cuLib, "cuInit"))
+        == NULL) {
         std::clog << "cuInit not found";
         return 1;
     }
-    if ((my_cuDeviceGetCount = (cuDeviceGetCount_pt)getProcAddress(
-             cuLib, "cuDeviceGetCount")) == NULL) {
+    if ((my_cuDeviceGetCount = (cuDeviceGetCount_pt) getProcAddress(
+            cuLib, "cuDeviceGetCount")) == NULL) {
         std::clog << "cuDeviceGetCount not found";
         return 1;
     }
     if ((my_cuDeviceComputeCapability = (cuDeviceComputeCapability_pt)
-             getProcAddress(cuLib, "cuDeviceComputeCapability")) == NULL) {
+            getProcAddress(cuLib, "cuDeviceComputeCapability")) == NULL) {
         std::clog << "cuDeviceComputeCapability not found";
         return 1;
     }

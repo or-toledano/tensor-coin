@@ -17,10 +17,11 @@ set(TEST_FILES test/main.cpp test/tests.hpp test/tests.cpp)
 find_package(CUDA)
 if (CUDA_FOUND)
     enable_language(CUDA)
-    add_executable(tensor-coin ${TEST_FILES} ${BLOCKCHAIN_FILES} ${HASH_FILES} ${CUDA_HASH_FILES})
+    add_executable(tensor-coin ${TEST_FILES} ${BLOCKCHAIN_FILES} ${HASH_FILES}
+            ${CUDA_HASH_FILES})
+    target_compile_definitions(tensor-coin PRIVATE COMPILE_WITH_CUDA)
     set_target_properties(tensor-coin PROPERTIES CUDA_SEPARABLE_COMPILATION ON)
-    target_link_libraries(tensor-coin /opt/cuda/lib/libcublas.so)
-    # target_link_libraries(tensor-coin -lcublas) # fails for arch ):
+    target_link_libraries(tensor-coin -lcublas) # Works on Arch linux/CUDA11
 else ()
     add_executable(tensor-coin ${TEST_FILES} ${BLOCKCHAIN_FILES} ${HASH_FILES})
 endif ()

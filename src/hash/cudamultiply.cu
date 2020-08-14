@@ -12,12 +12,11 @@
 #define IDX(matrix, row, column) ((M*M)*(matrix)+(IDX2C((row),(column),M)))
 
 
-
 // Multiply the ind0 matrix with the ind1 matrix, add to the ind_res matrix
 // assume all indices are different and matrices are initialized
 void
-cuda_multiply_add(const unsigned char *cube_src, unsigned char *cube_dst, int ind0,
-             int ind1, int ind_res) {
+cuda_multiply_add(const unsigned char *cube_src, unsigned char *cube_dst, int
+ind0, int ind1, int ind_res) {
     float *devPtrA, *devPtrB, *devPtrRes;
     // Error codes for alloc on gpu
     cudaError_t cudaStat1 = cudaMalloc((float **) &devPtrA,
@@ -39,11 +38,11 @@ cuda_multiply_add(const unsigned char *cube_src, unsigned char *cube_dst, int in
         exit(EXIT_FAILURE);
     }
     // Download from cpu to gpu
-    stat1 = cublasSetMatrix(M, M, sizeof(*cube_src), cube_src + M * M * ind0, M,
-                            devPtrA, M);
+    stat1 = cublasSetMatrix(M, M, sizeof(*cube_src), cube_src + M * M * ind0,
+                            M, devPtrA, M);
     cublasStatus_t stat2 = cublasSetMatrix(M, M, sizeof(*cube_src),
-                                           cube_src + M * M * ind1, M, devPtrA,
-                                           M);
+                                           cube_src + M * M * ind1, M,
+                                           devPtrA, M);
     // Error codes for cpu to gpu bus
     if (stat1 != CUBLAS_STATUS_SUCCESS || stat2 != CUBLAS_STATUS_SUCCESS) {
         printf("data download failed\n");
