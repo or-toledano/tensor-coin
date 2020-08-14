@@ -2,11 +2,7 @@
 // Copyright © 2020 Or Toledano
 #include "cudamultiply.cuh"
 #include <cublas_v2.h>
-#include <cuda.h>
-#include <cuda_runtime.h>
-#include <cuda_runtime.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
 
 
 #define M 4

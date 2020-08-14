@@ -2,15 +2,16 @@
 // Copyright © 2020 Or Toledano
 // based on:
 // stackoverflow.com/questions/12828468/detecting-nvidia-gpus-without-cuda
-#include "cpuhash.hpp"
-#include "cudahash.hpp"
-#include <cuda.h>
+
 #include <iostream>
+#include <cuda.h>
 
 #ifdef WINDOWS
 #include <Windows.h>
 #else
+
 #include <dlfcn.h>
+
 #endif
 
 void *loadCudaLibrary() {
@@ -73,7 +74,7 @@ int detect_cuda() {
         int count, i;
         if (CUDA_SUCCESS != my_cuInit(0)) {
             std::clog << "cuInit failed";
-            return 1
+            return 1;
         }
         if (CUDA_SUCCESS != my_cuDeviceGetCount(&count)) {
             std::clog << "cuInit failed";
@@ -95,10 +96,3 @@ int detect_cuda() {
     return 0;
 }
 
-std::unique_ptr<UHash> make_uhash_runtime() {
-    if (detect_cuda()) {
-        return std::make_unique<CPUHash>(CPUHash());
-    } else {
-        return std::make_unique<CUDAHash>(CUDAHash());
-    }
-}

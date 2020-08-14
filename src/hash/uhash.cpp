@@ -2,33 +2,34 @@
 // Copyright © 2020 Or Toledano
 #include "uhash.hpp"
 #include "cpuhash.hpp"
-#include <iostream>
 #include <iomanip>
 #include <cstring>
 #include <functional>
+#include <algorithm>
+#include <sstream>
 
-#if __has_include("cuda.h")
-#include "runtime_detection.hpp"
-#endif
-
+#include "runtime_detection.cuh"
+#include "cudahash.hpp"
 
 using namespace tensorcoin::hash;
 
 
 std::unique_ptr<UHash> UHash::make_uhash() {
-
-#if __has_include("cuda.h") // GPU might still fail, we need some runtime checks
-    return make_uhash_runtime(); // Might return GPUHash or CPUHash
-#endif
+    if (!detect_cuda())
+        return std::make_unique<CUDAHash>(CUDAHash());
     return std::make_unique<CPUHash>(CPUHash());
 }
 
 string UHash::digest_to_string(const unsigned char *src) {
-    std::stringstream ss;
-    for (int i = 0; i < SHA256_DIGEST_LENGTH; ++i)
-        ss << std::hex << std::setw(2) << std::setfill('0')
-           << static_cast<int>(src[i]);
-    return ss.str();;
+//    std::ostringstream ss;
+//    for (int i = 0; i < SHA256_DIGEST_LENGTH; ++i)
+//        ss << std::hex << std::setw(2) << std::setfill('0')
+//           << static_cast<int>(src[i]);
+//    return ss.str();;
+    char str[SHA256_DIGEST_LENGTH * 2];
+    for (int i = 0; i < SHA256_DIGEST_LENGTH; i++)
+        std::sprintf(&str[i * 2], "%02x", (unsigned int) src[i]);
+    return string(str);
 }
 
 // Split the sha256 of input (which is 64 hex letters) into 4 4x4 MATS,
