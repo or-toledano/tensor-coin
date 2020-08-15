@@ -28,7 +28,8 @@ void myCudaCondDtor(cublasStatus_t stat, const char *msg) {
     }
 }
 
-// This is so sad. Can we please get integer MMU to CUDA ??
+// This is so sad. Can we please get integer MMU to CUDA ?? (cublasSgemmEx
+// does support INT8 for A/B, but not for C!)
 // TODO: change algo so it will reinterpret char as float to avoid conversion ??
 void uchar_to_float(const unsigned char *src, float *dst) {
     for (int i = 0; i < MAT_SIZE; ++i)

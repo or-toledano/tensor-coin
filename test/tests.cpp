@@ -24,7 +24,7 @@ void Tests::testBlock() {
 }
 
 void Tests::testChain() {
-    Chain c(2, 1);
+    Chain c(2, 2);
     c.mineAddBlock("Just mined this block, reward me with 10 tensorCoins",
                    "Or");
     c.mineAddBlock("Give me 10 tensorCoins, and transfer 5 coins to Or",
@@ -35,25 +35,21 @@ void Tests::testChain() {
 
 
 void Tests::testValid() {
-    Chain c(1, 5);
+    Chain c(1, 1);
     c.mineAddBlock("Just mined this block, reward me with 10 tensorCoins",
                    "Or");
     c.mineAddBlock("Give me 10 tensorCoins, and transfer 5 coins to Or",
                    "Toledano");
-    c.mineAddBlock("More", "Toledano");
-    c.mineAddBlock("Od", "Toledano");
-    c.mineAddBlock("50", "Toledano");
     cout << "isValidChain: " << (AuthWallet::isValidChain(c) ? "Yes" : "No")
          << "\n";
 }
 
 void Tests::testInvalid() {
-    Chain c(1, 5);
+    Chain c(1, 1);
     c.mineAddBlock("Just mined this block, reward me with 10 tensorCoins",
                    "Or");
     c.mineAddBlock("Give me 10 tensorCoins, and transfer 5 coins to Or",
                    "Toledano");
-    c.mineAddBlock("More", "Toledano");
     c.addBlock(Block(1, 4, "not prev_hash",
                      "My block now!", "Orto"));
     cout << "isValidChain: " << (AuthWallet::isValidChain(c) ? "Yes" : "No")

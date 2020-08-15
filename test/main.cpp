@@ -5,8 +5,10 @@
 using namespace tensorcoin::test;
 
 int main() {
-    Tests::testHash();
-//    Tests::testValid();
-//    Tests::testInvalid();
+//    Tests::testHash();
+//    Tests::testBlock();
+//    Tests::testChain();
+    Tests::testValid();
+    Tests::testInvalid();
 }
 
