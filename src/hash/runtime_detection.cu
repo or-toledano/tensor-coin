@@ -53,34 +53,34 @@ int detect_cuda() {
     cuDeviceComputeCapability_pt my_cuDeviceComputeCapability = NULL;
 
     if ((cuLib = loadCudaLibrary()) == NULL) {
-        std::clog << "CUDA library can't be loaded";
+        std::clog << "CUDA library can't be loaded\n";
         return 1;
     }
 
     if ((my_cuInit = (cuInit_pt) getProcAddress(cuLib, "cuInit"))
         == NULL) {
-        std::clog << "cuInit not found";
+        std::clog << "cuInit not found\n";
         return 1;
     }
     if ((my_cuDeviceGetCount = (cuDeviceGetCount_pt) getProcAddress(
             cuLib, "cuDeviceGetCount")) == NULL) {
-        std::clog << "cuDeviceGetCount not found";
+        std::clog << "cuDeviceGetCount not found\n";
         return 1;
     }
     if ((my_cuDeviceComputeCapability = (cuDeviceComputeCapability_pt)
             getProcAddress(cuLib, "cuDeviceComputeCapability")) == NULL) {
-        std::clog << "cuDeviceComputeCapability not found";
+        std::clog << "cuDeviceComputeCapability not found\n";
         return 1;
     }
 
     {
         int count, i;
         if (CUDA_SUCCESS != my_cuInit(0)) {
-            std::clog << "cuInit failed";
+            std::clog << "cuInit failed\n";
             return 1;
         }
         if (CUDA_SUCCESS != my_cuDeviceGetCount(&count)) {
-            std::clog << "cuInit failed";
+            std::clog << "cuInit failed\n";
             return 1;
         }
 
@@ -88,7 +88,7 @@ int detect_cuda() {
             int major, minor;
             if (CUDA_SUCCESS !=
                 my_cuDeviceComputeCapability(&major, &minor, i)) {
-                std::clog << "cuDeviceComputeCapability failed";
+                std::clog << "cuDeviceComputeCapability failed\n";
                 return 1;
             }
             std::clog << "dev " << i << " CUDA compute capability major "

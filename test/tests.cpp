@@ -4,18 +4,18 @@
 #include "../src/blockchain/block.hpp"
 #include "../src/blockchain/chain.hpp"
 #include "../src/blockchain/auth_wallet.hpp"
-#include "../src/hash/cpuhash.hpp"
 #include <iostream>
 
 using std::cout;
 using std::string;
 using namespace tensorcoin::test;
+using namespace tensorcoin::hash;
 using namespace tensorcoin::blockchain;
 
 void Tests::testHash() {
     string input = "When Mr. Bilbo Baggins of Bag End announced";
-    CPUHash h;
-    cout << "HASH_FUNC: '" << h.hash(input) << "\n";
+    std::unique_ptr<UHash> uh = UHash::make_uhash();
+    cout << "Hash: <" << uh->hash(input) << ">\n";
 }
 
 void Tests::testBlock() {

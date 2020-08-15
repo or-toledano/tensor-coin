@@ -32,7 +32,8 @@ string UHash::digest_to_string(const unsigned char *src) {
 //        ss << std::hex << std::setw(2) << std::setfill('0')
 //           << static_cast<int>(src[i]);
 //    return ss.str();;
-    char str[SHA256_DIGEST_LENGTH * 2];
+    char str[SHA256_DIGEST_LENGTH * 2 + 1];
+    str[SHA256_DIGEST_LENGTH * 2] = 0;
     for (int i = 0; i < SHA256_DIGEST_LENGTH; i++)
         std::sprintf(&str[i * 2], "%02x", (unsigned int) src[i]);
     return string(str);
