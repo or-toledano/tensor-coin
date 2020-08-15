@@ -43,7 +43,7 @@ void Tests::testValid() {
     c.mineAddBlock("More", "Toledano");
     c.mineAddBlock("Od", "Toledano");
     c.mineAddBlock("50", "Toledano");
-    cout << "isValidChain: " << (AuthWallet::isValidChain(&c) ? "Yes" : "No")
+    cout << "isValidChain: " << (AuthWallet::isValidChain(c) ? "Yes" : "No")
          << "\n";
 }
 
@@ -56,6 +56,6 @@ void Tests::testInvalid() {
     c.mineAddBlock("More", "Toledano");
     c.addBlock(Block(1, 4, "not prev_hash",
                      "My block now!", "Orto"));
-    cout << "isValidChain: " << (AuthWallet::isValidChain(&c) ? "Yes" : "No")
+    cout << "isValidChain: " << (AuthWallet::isValidChain(c) ? "Yes" : "No")
          << "\n";
 }

@@ -38,7 +38,7 @@ void Chain::addBlock(Block &&b) {
 
 size_t Chain::size() const { return blockList.size(); }
 
-string Chain::hashBlock(Block &s) const {
+string Chain::hashBlock(const Block &s) const {
     return uHash->hash(s.stringToHash());
 };
 

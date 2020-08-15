@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.17)
 project("tensor-coin LANGUAGES CXX CUDA")
 
-# set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CUDA_HASH_FILES src/hash/runtime_detection.cuh src/hash/runtime_detection.cu
         src/hash/cudahash.hpp src/hash/cudahash.cpp

@@ -23,26 +23,26 @@ namespace tensorcoin::blockchain {
         Block(int target, int version, string prev_hash, string data,
               string claimer);
 
-        int getVersion() const;
+        [[nodiscard]] int getVersion() const;
 
-        const string &getPrevHash() const;
+        [[nodiscard]] const string &getPrevHash() const;
 
-        time_t getTimeStamp() const;
+        [[nodiscard]] time_t getTimeStamp() const;
 
-        int getTarget() const;
+        [[nodiscard]] int getTarget() const;
 
-        int getNonce() const;
+        [[nodiscard]] int getNonce() const;
 
         void incNonce();
 
-        const string &getData() const;
+        [[nodiscard]] const string &getData() const;
 
-        const string &getClaimer() const;
+        [[nodiscard]] const string &getClaimer() const;
 
         // Concatenation - to be used when finding a golden nonce. Timestamp
         // is used to prevent a replay attack, and the owner is included in
         // the hash to make the proof of work credit verifiable.
-        string stringToHash() const;
+        [[nodiscard]] string stringToHash() const;
 
     };
 }

@@ -33,19 +33,19 @@ namespace tensorcoin::blockchain {
 
         Chain(int target, int blocksToIncTarget);
 
-        int getTarget() const;
+        [[nodiscard]] int getTarget() const;
 
-        int getBlocksToChangeTarget() const;
+        [[nodiscard]] int getBlocksToChangeTarget() const;
 
         void mineAddBlock(string data, string claimer);
 
         // Adds a block to the chain, WITHOUT verifying it
         void addBlock(Block &&b);
 
-        size_t size() const;
+        [[nodiscard]] size_t size() const;
 
         // Use the chain-specific hash on the block
-        string hashBlock(Block &s) const;
+        [[nodiscard]] string hashBlock(const Block &s) const;
     };
 
 }

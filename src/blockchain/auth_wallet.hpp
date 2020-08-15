@@ -12,14 +12,15 @@ namespace tensorcoin::blockchain {
     // verify it
     class AuthWallet {
     private:
-        Chain *currentChain;         // Maintain the longest valid chain
+        const Chain *currentChain;         // Maintain the longest valid chain
     public:
         // Was the chain mined properly
-        static bool isValidChain(Chain *chain);
+        static bool isValidChain(const Chain &chain);
 
-        explicit AuthWallet(Chain *chain);
+        explicit AuthWallet(const Chain &chain);
 
-        void updateBestChain(Chain *newChain); // Update to the longest valid
+        void
+        updateBestChain(const Chain &newChain); // Update to the longest valid
     };
 }
 
