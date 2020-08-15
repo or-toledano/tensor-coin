@@ -12,10 +12,15 @@
 
 #define MATS 4
 #define ROWS 4
-#define COLUMNS 4
+#define COLUMNS ROWS
+#define DIM ROWS
+// Column major (transposed) multiplication is ok in C for small dimensions
+// (cache-misses-wise), and it matches the column major CUDA (which can be
+// transposed but it is easier that way)
 #define IDX(matrix, row, column)                                               \
-    (ROWS * COLUMNS * (matrix) + COLUMNS * (row) + (column))
+    (ROWS * COLUMNS * (matrix) + ROWS * (column) + (row))
 #define MAT_MULT_ITERS 1
+#define MAT_SIZE (ROWS*COLUMNS)
 #define CUBE_SIZE (MATS*ROWS*COLUMNS)
 
 using std::string;

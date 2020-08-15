@@ -28,6 +28,3 @@ endif ()
 
 find_package(OpenSSL REQUIRED)
 target_link_libraries(tensor-coin OpenSSL::SSL)
-
-
-

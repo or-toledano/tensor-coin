@@ -3,5 +3,5 @@
 #pragma once
 
 void
-cuda_multiply_add(const unsigned char *cube_src, unsigned char *cube_dst,
-                  int ind0, int ind1, int ind_res);
+cudaMultiplyAdd(const unsigned char *cubeSrc, unsigned char *cubeDst,
+                int ind0, int ind1, int indRes);

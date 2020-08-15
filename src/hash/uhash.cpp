@@ -5,7 +5,6 @@
 #include <iomanip>
 #include <cstring>
 #include <functional>
-#include <algorithm>
 #include <sstream>
 
 #ifdef COMPILE_WITH_CUDA
@@ -33,9 +32,9 @@ string UHash::digest_to_string(const unsigned char *src) {
 //           << static_cast<int>(src[i]);
 //    return ss.str();;
     char str[SHA256_DIGEST_LENGTH * 2 + 1];
-    str[SHA256_DIGEST_LENGTH * 2] = 0;
+    str[SHA256_DIGEST_LENGTH * 2] = '\0';
     for (int i = 0; i < SHA256_DIGEST_LENGTH; i++)
-        std::sprintf(&str[i * 2], "%02x", (unsigned int) src[i]);
+        std::sprintf(&str[i * 2], "%02x", static_cast<int>(src[i]));
     return string(str);
 }
 
