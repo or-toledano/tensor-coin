@@ -23,7 +23,7 @@ if (CUDA_FOUND)
     set_target_properties(tensor-coin PROPERTIES CUDA_SEPARABLE_COMPILATION ON)
     target_link_libraries(tensor-coin -lcublas) # Works on Arch linux/CUDA11
 else ()
-    add_executable(tensor-coin ${CPU_FILES} ${HASH_FILES})
+    add_executable(tensor-coin ${CPU_FILES})
 endif ()
 
 find_package(OpenSSL REQUIRED)
