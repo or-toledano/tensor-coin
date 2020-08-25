@@ -18,6 +18,5 @@ CPUHash::multiply_add(const unsigned char *cube_src, unsigned char *cube_dst,
                     cube_src[IDX(ind0, i, k)] * cube_src[IDX(ind1, k, j)];
             }
         }
-    string debug = string({'c', 'd'});
 }
 

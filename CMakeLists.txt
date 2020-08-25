@@ -13,17 +13,17 @@ set(BLOCKCHAIN_FILES src/blockchain/block.hpp src/blockchain/block.cpp
         src/blockchain/auth_wallet.cpp src/blockchain/auth_wallet.hpp)
 set(TEST_FILES test/main.cpp test/tests.hpp test/tests.cpp)
 
+set(CPU_FILES ${TEST_FILES} ${BLOCKCHAIN_FILES} ${HASH_FILES})
 
 find_package(CUDA)
 if (CUDA_FOUND)
     enable_language(CUDA)
-    add_executable(tensor-coin ${TEST_FILES} ${BLOCKCHAIN_FILES} ${HASH_FILES}
-            ${CUDA_HASH_FILES})
+    add_executable(tensor-coin ${CPU_FILES} ${CUDA_HASH_FILES})
     target_compile_definitions(tensor-coin PRIVATE COMPILE_WITH_CUDA)
     set_target_properties(tensor-coin PROPERTIES CUDA_SEPARABLE_COMPILATION ON)
     target_link_libraries(tensor-coin -lcublas) # Works on Arch linux/CUDA11
 else ()
-    add_executable(tensor-coin ${TEST_FILES} ${BLOCKCHAIN_FILES} ${HASH_FILES})
+    add_executable(tensor-coin ${CPU_FILES} ${HASH_FILES})
 endif ()
 
 find_package(OpenSSL REQUIRED)
