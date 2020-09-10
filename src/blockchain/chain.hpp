@@ -9,7 +9,7 @@
 #include <memory>
 
 using std::list;
-using namespace tensorcoin::hash;
+using tensorcoin::hash::UHash;
 namespace tensorcoin::blockchain {
     class Chain {
     private:
