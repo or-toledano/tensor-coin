@@ -8,7 +8,7 @@ using namespace tensorcoin::blockchain;
 
 bool AuthWallet::isValidChain(const Chain &chain) {
     if (!chain.size()) return false;
-    Block block = chain.blockList.front();
+    const Block& block = chain.blockList.front();
     string prev_hash = chain.hashBlock(block);
     auto prev_time = block.getTimeStamp();
     auto target = chain.init_target;
