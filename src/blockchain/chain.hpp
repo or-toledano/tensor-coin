@@ -39,8 +39,13 @@ namespace tensorcoin::blockchain {
 
         void mineAddBlock(string data, string claimer);
 
-        // Adds a block to the chain, WITHOUT verifying it
-        void addBlock(Block &&b);
+        // Add a block to the chain, WITHOUT verifying it
+        template<typename B>
+        requires std::is_same_v<Block,
+            std::remove_cv_t<std::remove_reference_t<B>>>
+        void addBlock(B &&b) {
+            blockList.emplace_back(std::forward<B>(b));
+        }
 
         [[nodiscard]] size_t size() const;
 

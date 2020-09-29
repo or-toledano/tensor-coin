@@ -25,15 +25,14 @@ void Chain::mineAddBlock(string data, string claimer) {
     (blockList.empty() ? "null" : hashBlock(blockList.back())),
         std::move(data), std::move(claimer));
     // Search for nonce which yields this.target leading zeros
-    while (!isGoldenHash(hashBlock(b), target)) b.incNonce();
+    while (!isGoldenHash(hashBlock(b), target)) [[likely]] b.incNonce();
     blockList.emplace_back(std::move(b));
+    // Increase the target once in a <blocksToIncTarget> times
     if (blockList.size() % blocksToIncTarget == 0 and
         target < uHash->getHexDigits())
-        ++target; // Increase the target once in a <blocksToIncTarget> times
-}
+        [[unlikely]]
+        ++target;
 
-void Chain::addBlock(Block &&b) {
-    blockList.emplace_back(std::forward<Block>(b));
 }
 
 size_t Chain::size() const { return blockList.size(); }

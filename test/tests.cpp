@@ -50,8 +50,11 @@ void Tests::testInvalid() {
                    "Or");
     c.mineAddBlock("Give me 10 tensorCoins, and transfer 5 coins to Or",
                    "Toledano");
-    c.addBlock(Block(1, 4, "not prev_hash",
-                     "My block now!", "Orto"));
+    Block b = Block(1, 4, "not prev_hash",
+                    "Fake block by reference", "Orto");
+    c.addBlock(b);
+    c.addBlock(Block(1, 4, "INVALID",
+                     "Fake rvalue block", "0470"));
     cout << "isValidChain: " << (AuthWallet::isValidChain(c) ? "Yes" : "No")
          << "\n";
 }
