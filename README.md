@@ -1,8 +1,8 @@
 # tensor-coin
 ## Important files
 [uhash.hpp](src/hash/uhash.hpp) [uhash.cpp](src/hash/uhash.cpp) \
-And block{[.hpp]{src/blockchain/block.hpp},[.cpp]{src/blockchain/block.cpp}},
-chain{[.hpp]{src/blockchain/chain.hpp},[.cpp]{src/blockchain/chain.cpp}}.
+And block{[.hpp](src/blockchain/block.hpp),[.cpp](src/blockchain/block.cpp)},
+chain{[.hpp](src/blockchain/chain.hpp),[.cpp](src/blockchain/chain.cpp)}.
 
 ## Blockchain, polymorphic (runtime CPU/GPU dynamic type) uhash, and validator, built from scratch.
 Note that the tensorhash algorithm is only conceptual - it is an example for
