@@ -1,4 +1,5 @@
 # tensor-coin
+My idea for a hash function and a blockchain based on matrix multiplication
 ## Important files
 [uhash.hpp](src/hash/uhash.hpp) [uhash.cpp](src/hash/uhash.cpp) \
 And block{[.hpp](src/blockchain/block.hpp),[.cpp](src/blockchain/block.cpp)},
